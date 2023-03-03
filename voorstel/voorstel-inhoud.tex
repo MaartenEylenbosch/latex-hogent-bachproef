@@ -14,7 +14,7 @@ Dit onderzoek zal afhankelijk van deze ondervindingen in vergelijking met de hui
 
 %---------- Stand van zaken ---------------------------------------------------
 
-\section{State-of-the-art}%
+\section{State of the art}%
 \label{sec:state-of-the-art}
 
 Een mainframe is een computer die gebruikt wordt voor kritieke toepassingen vanwege hoge performantie, stabiliteit en veiligheid \autocite{IBM}. Dankzij de capaciteit om duizenden transacties per seconde te verwerken staat het mainframe centraal in de infrastructuur van bedrijven zoals KBC \autocite{IBM2010}.
@@ -23,7 +23,7 @@ Het voornaamste besturingssysteem voor mainframes is IBM z/OS. Dit is een 64-bit
 
 De omgeving die in dit onderzoek bekeken wordt, maakt gebruikt van Logical Partitions (LPARs), dit zijn partities in een z/OS systeem die zich als onafhankelijke systemen kunnen gedragen \autocite{IBM2010a}.
 
-De testomgeving voor onze proof of concept zit op een aparte LPAR afgeschermd van de productieomgeving.
+De testomgeving voor de proof of concept zit op een aparte LPAR afgeschermd van de productieomgeving.
 Db2 for z/OS is een relationeel database management systeem \autocite{IBM2022a}.
 
 KBC gebruikt momenteel voor het beheer van zijn Db2 instanties IBM Data Studio. Deze tool is gebaseerd op Eclipse en heeft veel van dezelfde functionaliteiten zoals bijvoorbeeld plugins \autocite{IBM2021}.
@@ -33,11 +33,11 @@ De verbinding tussen Data Studio en Db2 gebeurt dankzij Db2 Connect \autocite{IB
 IBM Db2 Administration Foundation for z/OS (ADF) is een software voor het beheer van Db2. Deze software maakt deel uit van de IBM Unified Management Server for z/OS (UMS). Dit software pakket wordt gebruikt via IBM Unified Experience for z/OS, een grafische interface die draait op Zowe \autocite{IBM2022c}.
 
 \begin{figure}[h]
-    \includegraphics[scale=0.16]{UMS-ZOWE-ADF opstelling}
+    \includegraphics[scale=0.17]{UMS-ZOWE-ADF opstelling}
     \caption{Voorstelling van een configuratie met ADF \autocite{IBM2022c}}
 \end{figure}
 
-Zowe is een open source framework van het Open Mainframe Project, het zorgt voor moderne interfaces en manieren om met z/OS te werken via de browser. Het bevat ook een API mediation layer dat dient als toegangspunt voor REST APIs. Zowe bestaat uit onder andere een virtuele desktop, een command-line interface, een Visual Studio Code extension, enz \autocite{Zowe2022}.
+Zowe is een open source framework van het Open Mainframe Project, het zorgt voor moderne interfaces en manieren om met z/OS te werken via de browser. Het bevat ook een API mediation layer dat dient als toegangspunt voor REST APIs. Zowe bestaat uit onder andere een virtuele desktop, een command line interface, een Visual Studio Code extension, enz \autocite{Zowe2022}.
 
 REST staat voor representational state transfer, APIs worden gebruikt om informatie van programma’s of systemen op te halen. REST APIs sturen een voorstelling van de staat van de bron \autocite{RedHat2020}.
 
@@ -48,11 +48,13 @@ Om beheer van IDAA via ADF mogelijk te maken is ook de IBM DB2 Analysis Accelera
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Dit onderzoek zal in eerste instantie bestaan uit een proof of concept. Op de testomgeving van KBC zullen Zowe, UMS,  IBM DB2 Analysis Accelerator Administration Services en ten slotte ADF geïnstalleerd en geconfigureerd worden.
+Om de maturiteit van Administration Foundation met Data Studio te vergelijken zal een vergelijkende studie uitgevoerd worden.
 
-Daarna zal men in de 2de fase van het onderzoek kijken of deze configuratie Data Studio bij KBC kan vervangen. Daarvoor volgt een vergelijkende studie tussen ADF en Data Studio op het vlak van onder andere de functionaliteiten van beide programma’s.
+In eerste instantie volgt een oplijsting van de requirements van ADF aan de hand van de huidige functionaliteit van Data Studio.
 
-Ten slotte zal Administration Foundation zo uitgebreid mogelijk bekritiseerd worden naar enkele aanvullende eisen van KBC. Deze bijkomende criteria zijn de mogelijkheid tot Multi Factor Authenticatie, de levensduur van de verschillende programma’s in de configuratie en de frequentie van onderhoud en updates en hoeveel resources deze configuratie gebruikt op de testomgeving en welke impact zou dit hebben op de productieomgeving.
+Daarna zal men in de 2de fase van het onderzoek een proof of concept opzetten. Op de testomgeving van KBC zullen Zowe, UMS, IBM DB2 Analysis Accelerator Administration Services en ten slotte ADF geïnstalleerd en geconfigureerd worden.
+
+Ten slotte onderzoekt men via deze proof of concept of ADF dezelfde taken als Data Studio kan uitvoeren en of ADF al dan niet aan extra (niet-functionele) requirements voldoet.
 
 
 
@@ -66,5 +68,5 @@ Hieruit zal zowel duidelijk zijn welke functionaliteiten reeds aanwezig zijn, de
 
 Uit dit onderzoek zal ook blijken in hoeverre MFA mogelijk is en of ADF al stabiel genoeg is voor een productieomgeving op mainframe.
 
-De verwachte conclusie is dat ADF een volwaardige vervanger voor Data Studio is en dat KBC klaar is om de overstap naar de nieuwe software te zetten.
+De verwachte conclusie is dat ADF een volwaardige vervanger voor Data Studio is en klaar is om in een productieomgeving te draaien.
 
