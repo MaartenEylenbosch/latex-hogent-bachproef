@@ -3,70 +3,68 @@
 \section{Introductie}%
 \label{sec:introductie}
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+Het database management systeem dat KBC voor z/OS gebruikt is Db2. Voor het beheer hiervan maken ze gebruik van IBM Data Studio. Deze software krijgt echter geen nieuwe features meer en willen ze binnen enkele jaren vervangen.
 
-\begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
-\end{itemize}
+IBM Db2 Administration Foundation for z/OS, de nieuwe Db2 administratie software van IBM moet eerst voldoende ontwikkeld zijn voor KBC ze deze wilt binnenhalen. Dit onderzoek zal aan de hand van een Proof of Concept deze software beoordelen.
 
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
+Op de testomgeving van KBC zullen Db2 Administration Foundation en andere benodigde software eerst geïnstalleerd en geconfigureerd worden. Daarna volgt een onderzoek van deze configuratie naar onder andere maturiteit, veiligheid, functionaliteit, enz. 
 
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+Dit onderzoek zal afhankelijk van deze ondervindingen in vergelijking met de huidige installatie bestuderen of deze software Data Studio reeds kan vervangen en of het voor KBC interessant is om deze nieuwe IBM software aan te schaffen.
 
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
 
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{State-of-the-art}%
 \label{sec:state-of-the-art}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+Een mainframe is een computer die gebruikt wordt voor kritieke toepassingen vanwege hoge performantie, stabiliteit en veiligheid \autocite{IBM}. Dankzij de capaciteit om duizenden transacties per seconde te verwerken staat het mainframe centraal in de infrastructuur van bedrijven zoals KBC \autocite{IBM2010}.
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
+Het voornaamste besturingssysteem voor mainframes is IBM z/OS. Dit is een 64-bit besturingssysteem dat als grote kracht heeft dat het achterwaarts compatibel is. Daarnaast kan bijvoorbeeld Linux of Windows ook op mainframes draaien \autocite{MaryE.Shacklett2022}.
 
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+De omgeving die in dit onderzoek bekeken wordt, maakt gebruikt van Logical Partitions (LPARs), dit zijn partities in een z/OS systeem die zich als onafhankelijke systemen kunnen gedragen \autocite{IBM2010a}.
 
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
+De testomgeving voor onze proof of concept zit op een aparte LPAR afgeschermd van de productieomgeving.
+Db2 for z/OS is een relationeel database management systeem \autocite{IBM2022a}.
 
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
+KBC gebruikt momenteel voor het beheer van zijn Db2 instanties IBM Data Studio. Deze tool is gebaseerd op Eclipse en heeft veel van dezelfde functionaliteiten zoals bijvoorbeeld plugins \autocite{IBM2021}.
 
-% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
-% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
-%   geen onderdeel is van de zin.
-% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
-%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
-%   ...'')
+De verbinding tussen Data Studio en Db2 gebeurt dankzij Db2 Connect \autocite{IBM2022b}. Men gebruikt ook een IBM Db2 Analytics Accelerator (IDAA) voor grote en dure Db2 query’s. Dit is een bijkomende hardware en software dat via ethernet in verbinding staat met het mainframe \autocite{Bruni2012}. 
 
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
+IBM Db2 Administration Foundation for z/OS (ADF) is een software voor het beheer van Db2. Deze software maakt deel uit van de IBM Unified Management Server for z/OS (UMS). Dit software pakket wordt gebruikt via IBM Unified Experience for z/OS, een grafische interface die draait op Zowe \autocite{IBM2022c}.
+
+\begin{figure}[h]
+    \includegraphics[scale=0.16]{UMS-ZOWE-ADF opstelling}
+    \caption{Voorstelling van een configuratie met ADF \autocite{IBM2022c}}
+\end{figure}
+
+Zowe is een open source framework van het Open Mainframe Project, het zorgt voor moderne interfaces en manieren om met z/OS te werken via de browser. Het bevat ook een API mediation layer dat dient als toegangspunt voor REST APIs. Zowe bestaat uit onder andere een virtuele desktop, een command-line interface, een Visual Studio Code extension, enz \autocite{Zowe2022}.
+
+REST staat voor representational state transfer, APIs worden gebruikt om informatie van programma’s of systemen op te halen. REST APIs sturen een voorstelling van de staat van de bron \autocite{RedHat2020}.
+
+Om beheer van IDAA via ADF mogelijk te maken is ook de IBM DB2 Analysis Accelerator Administration Services software nodig. Deze software bestaat uit een aantal REST APIs en de user interface draait op Zowe \autocite{IBM2022d}.
+
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+Dit onderzoek zal in eerste instantie bestaan uit een proof of concept. Op de testomgeving van KBC zullen Zowe, UMS,  IBM DB2 Analysis Accelerator Administration Services en ten slotte ADF geïnstalleerd en geconfigureerd worden.
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+Daarna zal men in de 2de fase van het onderzoek kijken of deze configuratie Data Studio bij KBC kan vervangen. Daarvoor volgt een vergelijkende studie tussen ADF en Data Studio op het vlak van onder andere de functionaliteiten van beide programma’s.
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+Ten slotte zal Administration Foundation zo uitgebreid mogelijk bekritiseerd worden naar enkele aanvullende eisen van KBC. Deze bijkomende criteria zijn de mogelijkheid tot Multi Factor Authenticatie, de levensduur van de verschillende programma’s in de configuratie en de frequentie van onderhoud en updates en hoeveel resources deze configuratie gebruikt op de testomgeving en welke impact zou dit hebben op de productieomgeving.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
-
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+Het verwachte resultaat zal een combinatie zijn van de Proof of Concept en de studie naar de mogelijkheden van ADF in vergelijking met Data Studio. 
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+Hieruit zal zowel duidelijk zijn welke functionaliteiten reeds aanwezig zijn, de mogelijkheden die in Data Studio zitten en in ADF nog ontbreken en zaken die niet in Data Studio zitten maar wel in ADF.
 
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+Uit dit onderzoek zal ook blijken in hoeverre MFA mogelijk is en of ADF al stabiel genoeg is voor een productieomgeving op mainframe.
+
+De verwachte conclusie is dat ADF een volwaardige vervanger voor Data Studio is en dat KBC klaar is om de overstap naar de nieuwe software te zetten.
 

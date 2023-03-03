@@ -122,11 +122,4 @@
   url    = {https://docs.zowe.org/stable/getting-started/overview/},
 }
 
-@Online{IBM2022d,
-  author = {IBM},
-  date   = {2022-03-18},
-  title  = {IBM Db2 Analytics Accelerator Administration Services},
-  url    = {https://www.ibm.com/docs/en/daafz/7.5?topic=installing-db2-analytics-accelerator-administration-services},
-}
-
 @Comment{jabref-meta: databaseType:biblatex;}
